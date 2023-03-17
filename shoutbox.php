@@ -28,20 +28,20 @@ include 'database/connectie.php'
                 </ul>
             </div>
             <div class="uk-card-footer uk-card-primary">
-                <form>
+                <form method="post" action="shoutbox/process.php">
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                            <input class="uk-input" type="text" placeholder="Voornaam" aria-label="Not clickable icon">
+                            <input class="uk-input" type="text" placeholder="Voornaam" name="gebruiker" aria-label="Not clickable icon">
                         </div>
                         <div class="uk-margin">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: file-edit"></span>
-                                <input class="uk-input uk-form-width-large" type="text" placeholder="Bericht" aria-label="Not clickable icon">
+                                <input class="uk-input uk-form-width-large" type="text" placeholder="Bericht" name="bericht" aria-label="Not clickable icon">
                             </div>
                     </div>
                         <div>
-                            <input type="button" class="uk-button uk-button-danger" value="SCHREEUW HET UIT!!">
+                            <input type="submit" class="uk-button uk-button-danger" name="verzenden" value="SCHREEUW HET UIT!!" aria-label="Not clickable icon" >
                         </div>
                 </form>
             </div>
