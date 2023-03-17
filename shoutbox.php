@@ -2,6 +2,10 @@
 include 'includes/header.php';
 include 'database/connectie.php'
 ?>
+<?php
+    $query = "SELECT * FROM shoutbox";
+    $berichten = mysqli_query($con,$query);
+?>
     <main>
         <div class="uk-card uk-card-default uk-width-1-2@m uk-align-center">
             <div class="uk-card-header">
@@ -12,10 +16,16 @@ include 'database/connectie.php'
                 </div>
             </div>
             <div class="uk-card-body">
-                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2023-03-07T11:00"> 7-03-2023 - 11:00 - </time><strong>naam: </strong>Dag allemaal</p>
-                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2023-03-07T11:00"> 7-03-2023 - 11:00 - </time><strong>naam: </strong>Dag allemaal</p>
-                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2023-03-07T11:00"> 7-03-2023 - 11:00 - </time><strong>naam: </strong>Dag allemaal</p>
-                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2023-03-07T11:00"> 7-03-2023 - 11:00 - </time><strong>naam: </strong>Dag allemaal</p>
+                <ul class="uk-list">
+                    <?php while ($rij = mysqli_fetch_assoc($berichten)) :
+                    ?>
+                        <li>
+                            <span class="uk-text-meta uk-margin-remove-top"><?php echo $rij['tijd']?> - </span>
+                            <span class="uk-text-bold"><?php echo $rij['gebruiker']?>: </span>
+                            <span class="uk-text-normal"><?php echo $rij["bericht"] ?></span>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
             </div>
             <div class="uk-card-footer uk-card-primary">
                 <form>
