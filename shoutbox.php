@@ -3,6 +3,11 @@ include 'includes/header.php';
 include 'database/connectie.php'
 ?>
 <?php
+$talen = array("nederlands", "engels");
+$taalkeuze = "nederlands";
+include("talen/" .$taalkeuze .".lang.php")
+?>
+<?php
 
 $query = "SELECT * FROM shoutbox";
 $berichten = mysqli_query($con, $query);
@@ -10,6 +15,38 @@ $berichten = mysqli_query($con, $query);
 ?>
     <main>
         <div class="uk-card uk-card-default uk-width-1-2@m uk-align-center">
+            <div class="uk-card-header">
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-expand">
+                        <form action="" method="post">
+                            <div uk-grid>
+                                <div class="uk-width-1-2">
+                                    <select class="uk-select"name="taalkeuze" aria-label="Select">
+                                        <?PHP
+
+                                            for ($i=0; $i < count ($talen); $i++)
+                                            {
+                                        ?>
+                                            <option value="<?=$talen[$i];?>"><?=$talen[$i];?></option>
+                                        <?PHP
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="uk-width-1-2">
+                                    <div class="uk-inline">
+                                        <input class="uk-button uk-button-secondary" type="submit" name="kiezen" value="Bevestig de taal!" aria-label="Not clickable icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                            $taalkeuze = isset($_POST["taalkeuze"]) ? $_POST["taalkeuze"] : "nederlands";
+                            include("talen/" . $taalkeuze . ".lang.php");
+                        ?>
+                    </div>
+                </div>
+            </div>
             <div class="uk-card-header">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                     <div class="uk-width-expand ">
@@ -43,18 +80,18 @@ $berichten = mysqli_query($con, $query);
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                            <input class="uk-input" type="text" placeholder="Voornaam" name="gebruiker" aria-label="Not clickable icon">
+                            <input class="uk-input" type="text" placeholder="<?php echo $_LANG['voornaam'] ?>" name="gebruiker" aria-label="Not clickable icon">
                         </div>
                     </div>
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: file-edit"></span>
-                            <input class="uk-input uk-form-width-large" type="text" placeholder="Bericht" name="bericht" aria-label="Not clickable icon">
+                            <input class="uk-input uk-form-width-large" type="text" placeholder= "<?php echo $_LANG['bericht'] ?>" name="bericht" aria-label="Not clickable icon">
                         </div>
                     </div>
                     <div class="uk-margin">
                         <div class="uk-inline">
-                            <input type="submit" name="verzenden" class="uk-button uk-button-danger" value="SCHREEUW HET UIT!!" aria-label="Not clickable icon">
+                            <input type="submit" name="verzenden" class="uk-button uk-button-danger" value= "<?php echo $_LANG['schreeuw'] ?>" aria-label="Not clickable icon">
                         </div>
                     </div>
                 </form>
